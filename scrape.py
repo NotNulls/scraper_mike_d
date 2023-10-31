@@ -51,8 +51,10 @@ all_names = driver.find_element(By.TAG_NAME,'table')
 
 time.sleep(1)
 for row in driver.find_elements(By.TAG_NAME,'tr')[1:]:
+    #print (row.text)
     time.sleep(0.1)
-    comp_name = row.find_element(By.TAG_NAME, 'td').text.split('\n')[0]
+    comp_name = [element.text.split('\n') for element in row.find_elements(By.TAG_NAME, 'td')][0][0]
+    print (comp_name)
     if search_word == comp_name:
         print('check 2')
         link = row.find_element(By.TAG_NAME, 'td')
@@ -62,12 +64,13 @@ for row in driver.find_elements(By.TAG_NAME,'tr')[1:]:
         time.sleep(1)
         # header = driver.find_elements((By.TAG_NAME, 'dt'))
         # header = [element.text for element in header]
-        
-        
-        # print (header)
+    else:
+        continue            
+            
+                
         
 
-# driver.close()    
+driver.close()    
 
         
 
